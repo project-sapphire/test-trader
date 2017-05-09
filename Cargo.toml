@@ -5,3 +5,4 @@ authors = ["Nils Ceberg <nils.ceberg@gmail.com>"]
 
 [dependencies]
 zmq = "0.8"
+prism = { path = "../prism-rust" }

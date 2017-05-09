@@ -2,6 +2,7 @@
 name = "test-trader"
 version = "0.1.0"
 dependencies = [
+ "prism 0.1.0",
  "zmq 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -34,6 +35,13 @@ dependencies = [
 name = "pkg-config"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "prism"
+version = "0.1.0"
+dependencies = [
+ "zmq 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "toml"

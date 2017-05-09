@@ -1,15 +1,8 @@
 extern crate zmq;
+extern crate prism;
 
-fn receive_rate(socket: &zmq::Socket) -> Result<(String, f64), String> {
-    let currency = try!(try!(socket.recv_string(0).map_err(|x|"".to_string())).map_err(|x|"".to_string()));
-    if currency.len() == 0 {
-        return Err("".to_string());
-    }
+use prism::{Message, ReceiveError};
 
-    let rate = try!(try!(socket.recv_string(0).map_err(|x|"".to_string())).map_err(|x|"".to_string()));
-
-    Ok((currency, try!(rate.parse().map_err(|x|"couldn't parse rate".to_string()))))
-}
 
 fn main() {
     println!("Starting...");
@@ -21,10 +14,7 @@ fn main() {
 
     println!("Connected; listening for ticks.");
 
-    while let Ok(Ok(currency)) = listener.recv_string(0) {
-        println!("Rates for {}", currency);
-        while let Ok((other_currency, rate)) = receive_rate(&listener) {
-            println!("- {}: {}", other_currency, rate);
-        }
+    while let Ok(Some(rate)) = prism::Rate::receive(&listener) {
+        println!("Rates for {}: {:?}", rate.currency, rate.values);
     }
 }
