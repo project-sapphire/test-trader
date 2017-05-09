@@ -14,7 +14,7 @@ fn main() {
 
     println!("Connected; listening for ticks.");
 
-    while let Ok(Some(rate)) = prism::Rate::receive(&listener) {
-        println!("Rates for {}: {:?}", rate.currency, rate.values);
+    while let Ok(Some(update)) = prism::RateUpdate::receive(&listener) {
+        println!("Rates for {} on {}: {:?}", update.currency, update.exchange, update.rate.values);
     }
 }
