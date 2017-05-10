@@ -23,8 +23,14 @@ fn main() {
 
         if i % 10 == 0 {
             std::thread::sleep_ms(300);
-            prism::ExchangeQuery::History.send(&query, 0);
-            let response = Vec::<prism::Rate>::receive(&query, 0);
+            prism::ExchangeRequest {
+                query: prism::ExchangeQuery::History(2000),
+                exchange: update.exchange,
+                currency: update.currency
+            }.send(&query, 0).unwrap();
+
+            let response = Vec::<prism::Rate>::receive(&query, 0).unwrap();
+
             println!("{:?}", response);
         }
 
