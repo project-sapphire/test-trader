@@ -4,5 +4,8 @@ version = "0.1.0"
 authors = ["Nils Ceberg <nils.ceberg@gmail.com>"]
 
 [dependencies]
+log = "0.3.7"
+simplelog = "0.4.2"
 zmq = "0.8"
+rand = "0.3.15"
 prism = { path = "../prism-rust" }
